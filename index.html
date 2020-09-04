@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+ </head>
+ <body>	
+	<div id="info"></div>
+	<script>
+  var http = new XMLHttpRequest();  
+  http.open('GET', 'https://ipinfo.io/json');
+  http.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+	  var response = JSON.parse(this.responseText);
+      document.getElementById('info').innerHTML = `
+	  <p>${response.org}</p>
+	  <p>${response.ip}</p>
+	  `;
+	  var provider = response.hostname.includes('mastertel');
+	  document.body.style.backgroundColor = provider ? "green" : "red";
+	  document.body.style.fontSize = '36px';
+	  document.body.style.fontWeight = 'bolder';
+    }
+  }
+  
+  http.send(null);
+	</script>
+ </body>
+</html>
