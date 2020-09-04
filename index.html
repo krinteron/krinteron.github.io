@@ -1,12 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
  <head>
- </head>
- <body>	
-	<div id="info"></div>
-	<script>
+ <script>
+function loadPage() {	
   var http = new XMLHttpRequest();  
   http.open('GET', 'https://ipinfo.io/json');
+  http.send();
   http.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 	  var response = JSON.parse(this.responseText);
@@ -20,8 +19,13 @@
 	  document.body.style.fontWeight = 'bolder';
     }
   }
+};
   
-  http.send(null);
+
 	</script>
+ </head>
+ <body onload="loadPage()">	
+	<div id="info"></div>
+	
  </body>
 </html>
