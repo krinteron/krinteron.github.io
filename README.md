@@ -1,1 +1,0 @@
-# krinteron.github.io
