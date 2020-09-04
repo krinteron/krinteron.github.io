@@ -3,22 +3,20 @@
  <head>
  <script>
 function loadPage() {	
-  var http = new XMLHttpRequest();  
-  http.open('GET', 'https://ipinfo.io/json');
-  http.send();
-  http.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-	  var response = JSON.parse(this.responseText);
-      document.body.innerHTML = `
-	  <p>${response.org}</p>
-	  <p>${response.ip}</p>
+  fetch('https://ipinfo.io/json')
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    document.body.innerHTML = `
+	  <p>${data.org}</p>
+	  <p>${data.ip}</p>
 	  `;
-	  var provider = response.hostname.includes('mastertel');
+	  var provider = data.hostname.includes('mastertel');
 	  document.body.style.backgroundColor = provider ? "green" : "red";
 	  document.body.style.fontSize = '36px';
 	  document.body.style.fontWeight = 'bolder';
-    }
-  }
+  });
 };
   
 
