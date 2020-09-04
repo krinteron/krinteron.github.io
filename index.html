@@ -9,7 +9,7 @@ function loadPage() {
   http.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
 	  var response = JSON.parse(this.responseText);
-      document.getElementById('info').innerHTML = `
+      document.body.innerHTML = `
 	  <p>${response.org}</p>
 	  <p>${response.ip}</p>
 	  `;
@@ -25,7 +25,5 @@ function loadPage() {
 	</script>
  </head>
  <body onload="loadPage()">	
-	<div id="info"></div>
-	
  </body>
 </html>
